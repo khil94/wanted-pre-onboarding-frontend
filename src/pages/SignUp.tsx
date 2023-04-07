@@ -41,30 +41,36 @@ export default function SignUp() {
   return (
     <FormWrapper>
       <Form onSubmit={(e) => submitHandler(e)}>
-        <Label htmlFor="signup-email">id</Label>
-        <Input
-          type="text"
-          id="signup-email"
-          name="email"
-          placeholder="이메일을 입력해주세요."
-          data-testid="email-input"
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
-        />
-        {emailErr && <WarningText>hi</WarningText>}
-        <Label htmlFor="signup-pwd">password</Label>
-        <PasswordInput
-          type="password"
-          id="signup-pwd"
-          name="pwd"
-          placeholder="비밀번호를 입력해주세요"
-          data-testid="password-input"
-          onChange={(e) => {
-            setPwd(e.target.value);
-          }}
-        />
-        {pwdErr && <WarningText>hi</WarningText>}
+        <InputWrapper>
+          <Label htmlFor="signup-email">id</Label>
+          <Input
+            type="text"
+            id="signup-email"
+            name="email"
+            placeholder="이메일을 입력해주세요."
+            data-testid="email-input"
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+          />
+          {emailErr && (
+            <WarningText>이메일에는 @가 들어가야 합니다!</WarningText>
+          )}
+        </InputWrapper>
+        <InputWrapper>
+          <Label htmlFor="signup-pwd">password</Label>
+          <Input
+            type="password"
+            id="signup-pwd"
+            name="pwd"
+            placeholder="비밀번호를 입력해주세요"
+            data-testid="password-input"
+            onChange={(e) => {
+              setPwd(e.target.value);
+            }}
+          />
+          {pwdErr && <WarningText>최소 8자 이상 기입해 주십시오.</WarningText>}
+        </InputWrapper>
         <SubmitBtn
           data-testid="signup-button"
           disabled={buttonDisable}
@@ -86,20 +92,23 @@ const Form = styled.form`
   flex-direction: column;
 `;
 
+const InputWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 112px;
+`;
+
 const Label = styled.label`
   font-weight: bold;
   font-size: 24px;
+  margin-top: 24px;
 `;
 
 const Input = styled.input`
-  margin: 12px 0 20px;
+  margin: 12px 0 4px;
   height: 32px;
   border-radius: 8px;
   padding: 0 12px;
-`;
-
-const PasswordInput = styled(Input)`
-  margin-bottom: 4px;
 `;
 
 const SubmitBtn = styled.button`
