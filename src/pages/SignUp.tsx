@@ -18,6 +18,7 @@ export default function SignUp() {
           id="signup-email"
           name="email"
           placeholder="이메일을 입력해주세요."
+          data-testid="email-input"
         />
         <Label htmlFor="signup-pwd">password</Label>
         <PasswordInput
@@ -25,9 +26,12 @@ export default function SignUp() {
           id="signup-pwd"
           name="pwd"
           placeholder="비밀번호를 입력해주세요"
+          data-testid="password-input"
         />
         {pwdErr && <WarningText>hi</WarningText>}
-        <SubmitInput type="submit" />
+        <SubmitBtn data-testid="signup-button" type="submit">
+          회원가입
+        </SubmitBtn>
       </Form>
     </FormWrapper>
   );
@@ -58,11 +62,13 @@ const PasswordInput = styled(Input)`
   margin-bottom: 4px;
 `;
 
-const SubmitInput = styled(Input)`
+const SubmitBtn = styled.button`
   background-color: #004c99;
   color: white;
   border: none;
   margin-top: 32px;
+  height: 32px;
+  border-radius: 8px;
 `;
 
 const WarningText = styled.span`
