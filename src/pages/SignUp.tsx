@@ -12,12 +12,12 @@ export default function SignUp() {
           console.log(e);
         }}
       >
-        <Label htmlFor="signup-id">id</Label>
+        <Label htmlFor="signup-email">id</Label>
         <Input
           type="text"
-          id="signup-id"
-          name="id"
-          placeholder="아이디를 입력해주세요."
+          id="signup-email"
+          name="email"
+          placeholder="이메일을 입력해주세요."
         />
         <Label htmlFor="signup-pwd">password</Label>
         <PasswordInput
