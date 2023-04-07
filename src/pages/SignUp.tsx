@@ -1,5 +1,7 @@
 import styled from "@emotion/styled";
 import { useState, useEffect, FormEvent } from "react";
+import { PostSignUp } from "../api/signApi";
+import { ISignUpReq } from "../types/api";
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
@@ -10,6 +12,10 @@ export default function SignUp() {
 
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    PostSignUp({
+      email,
+      password: pwd,
+    } as ISignUpReq);
   };
 
   const verifyEmail = (v: string) => {
@@ -85,6 +91,9 @@ export default function SignUp() {
 
 const FormWrapper = styled.div`
   width: 50%;
+  background-color: #f0f0f0;
+  padding: 20px;
+  border-radius: 12px;
 `;
 
 const Form = styled.form`
@@ -116,7 +125,7 @@ const SubmitBtn = styled.button`
   color: white;
   border: none;
   margin-top: 32px;
-  height: 32px;
+  height: 48px;
   border-radius: 8px;
   :disabled {
     background-color: #dddd;
