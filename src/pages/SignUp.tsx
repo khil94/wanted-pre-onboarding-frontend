@@ -17,13 +17,18 @@ export default function SignUp() {
   const [buttonDisable, setButtonDisable] = useState(true);
   const nav = useNavigate();
 
-  const submitHandler = (e: FormEvent<HTMLFormElement>) => {
+  const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    PostSignUp({
+    const resp = await PostSignUp({
       email,
       password: pwd,
     } as ISignUpReq);
-    nav("/signin");
+    if (resp?.status === 201) {
+      nav("/signin");
+    } else {
+      alert("회원가입이 정상적으로 완료되지 않았습니다!");
+      // 에러코드별 핸들링은 요구사항이 아니므로 생략
+    }
   };
 
   const verifyEmail = (v: string) => {
