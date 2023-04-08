@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { useState, useEffect, FormEvent } from "react";
 import { PostSignUp } from "../api/signApi";
 import { ISignUpReq } from "../types/api";
+import { useNavigate } from "react-router-dom";
 
 const formSize = {
   default: 480,
@@ -14,6 +15,7 @@ export default function SignUp() {
   const [emailErr, setEmailErr] = useState(false);
   const [pwdErr, setPwdErr] = useState(false);
   const [buttonDisable, setButtonDisable] = useState(true);
+  const nav = useNavigate();
 
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -21,6 +23,7 @@ export default function SignUp() {
       email,
       password: pwd,
     } as ISignUpReq);
+    nav("/signin");
   };
 
   const verifyEmail = (v: string) => {
