@@ -15,6 +15,8 @@ export default function SignIn() {
   const [emailErr, setEmailErr] = useState(false);
   const [pwdErr, setPwdErr] = useState(false);
   const [buttonDisable, setButtonDisable] = useState(true);
+  const [judging, setJudging] = useState(true);
+
   const nav = useNavigate();
 
   const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
@@ -56,55 +58,61 @@ export default function SignIn() {
   useEffect(() => {
     if (localStorage.getItem("pre-onboarding-key")) {
       nav("/todo");
+    } else {
+      setJudging(false);
     }
   }, []);
 
   return (
     <Container>
-      <h1>SignIn</h1>
-      <FormWrapper>
-        <Form onSubmit={(e) => submitHandler(e)}>
-          <InputWrapper>
-            <Label htmlFor="signup-email">id</Label>
-            <Input
-              type="text"
-              id="signup-email"
-              name="email"
-              placeholder="이메일을 입력해주세요."
-              data-testid="email-input"
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
-            />
-            {emailErr && (
-              <WarningText>이메일에는 @가 들어가야 합니다!</WarningText>
-            )}
-          </InputWrapper>
-          <InputWrapper>
-            <Label htmlFor="signup-pwd">password</Label>
-            <Input
-              type="password"
-              id="signup-pwd"
-              name="pwd"
-              placeholder="비밀번호를 입력해주세요"
-              data-testid="password-input"
-              onChange={(e) => {
-                setPwd(e.target.value);
-              }}
-            />
-            {pwdErr && (
-              <WarningText>최소 8자 이상 기입해 주십시오.</WarningText>
-            )}
-          </InputWrapper>
-          <SubmitBtn
-            data-testid="signin-button"
-            disabled={buttonDisable}
-            type="submit"
-          >
-            로그인
-          </SubmitBtn>
-        </Form>
-      </FormWrapper>
+      {!judging && (
+        <>
+          <h1>SignIn</h1>
+          <FormWrapper>
+            <Form onSubmit={(e) => submitHandler(e)}>
+              <InputWrapper>
+                <Label htmlFor="signup-email">id</Label>
+                <Input
+                  type="text"
+                  id="signup-email"
+                  name="email"
+                  placeholder="이메일을 입력해주세요."
+                  data-testid="email-input"
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
+                />
+                {emailErr && (
+                  <WarningText>이메일에는 @가 들어가야 합니다!</WarningText>
+                )}
+              </InputWrapper>
+              <InputWrapper>
+                <Label htmlFor="signup-pwd">password</Label>
+                <Input
+                  type="password"
+                  id="signup-pwd"
+                  name="pwd"
+                  placeholder="비밀번호를 입력해주세요"
+                  data-testid="password-input"
+                  onChange={(e) => {
+                    setPwd(e.target.value);
+                  }}
+                />
+                {pwdErr && (
+                  <WarningText>최소 8자 이상 기입해 주십시오.</WarningText>
+                )}
+              </InputWrapper>
+              <SubmitBtn
+                data-testid="signin-button"
+                disabled={buttonDisable}
+                type="submit"
+              >
+                로그인
+              </SubmitBtn>
+            </Form>
+          </FormWrapper>
+        </>
+      )}
     </Container>
   );
 }
