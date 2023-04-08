@@ -1,8 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import SignUp from "./pages/SignUp";
 import { CommonLayout } from "./components/CommonLayout";
-import SignIn from "./pages/SignIn";
+import Gate from "./pages/Gate";
 
 function App() {
   return (
@@ -12,8 +11,7 @@ function App() {
       </div>
       <CommonLayout>
         <Routes>
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/signin" element={<SignIn />} />
+          <Route path="/*" element={<Gate />} />
         </Routes>
       </CommonLayout>
     </BrowserRouter>

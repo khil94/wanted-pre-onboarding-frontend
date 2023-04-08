@@ -50,12 +50,6 @@ export default function SignUp() {
   }, [pwd]);
 
   useEffect(() => {
-    if (localStorage.getItem("pre-onboarding-key")) {
-      nav("/todo");
-    }
-  }, []);
-
-  useEffect(() => {
     if (!emailErr && !pwdErr && email !== "" && pwd !== "") {
       setButtonDisable(false);
     } else {
