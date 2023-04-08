@@ -10,7 +10,7 @@ api.interceptors.request.use(
     return config;
   },
   (error) => {
-    return Promise.reject(error);
+    console.log("Request Error : ", error);
   }
 );
 
@@ -22,7 +22,6 @@ api.interceptors.response.use(
   },
   (error) => {
     console.log("Response Error : ", error);
-    return Promise.reject(error);
   }
 );
 
