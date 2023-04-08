@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { useState, useEffect, FormEvent } from "react";
 import { PostSignIn } from "../api/signApi";
 import { ISignUpReq } from "../types/api";
+import { useNavigate } from "react-router-dom";
 
 const formSize = {
   default: 480,
@@ -14,13 +15,16 @@ export default function SignIn() {
   const [emailErr, setEmailErr] = useState(false);
   const [pwdErr, setPwdErr] = useState(false);
   const [buttonDisable, setButtonDisable] = useState(true);
+  const nav = useNavigate();
 
-  const submitHandler = (e: FormEvent<HTMLFormElement>) => {
+  const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    PostSignIn({
+    const resp = await PostSignIn({
       email,
       password: pwd,
     } as ISignUpReq);
+    localStorage.setItem("pre-onboarding-key", resp.data.access_token);
+    nav("/todo");
   };
 
   const verifyEmail = (v: string) => {
@@ -48,6 +52,12 @@ export default function SignIn() {
       setButtonDisable(true);
     }
   }, [emailErr, pwdErr, email, pwd]);
+
+  useEffect(() => {
+    if (localStorage.getItem("pre-onboarding-key")) {
+      nav("/todo");
+    }
+  }, []);
 
   return (
     <Container>
