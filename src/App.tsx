@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import SignUp from "./pages/SignUp";
 import { CommonLayout } from "./components/CommonLayout";
+import SignIn from "./pages/SignIn";
 
 function App() {
   return (
@@ -11,7 +12,8 @@ function App() {
       </div>
       <CommonLayout>
         <Routes>
-          <Route path="/" element={<SignUp />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/signin" element={<SignIn />} />
         </Routes>
       </CommonLayout>
     </BrowserRouter>
