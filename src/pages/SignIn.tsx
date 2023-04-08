@@ -51,7 +51,7 @@ export default function SignIn() {
 
   return (
     <Container>
-      <h1>SignUp</h1>
+      <h1>SignIn</h1>
       <FormWrapper>
         <Form onSubmit={(e) => submitHandler(e)}>
           <InputWrapper>
