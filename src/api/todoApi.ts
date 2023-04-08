@@ -1,39 +1,45 @@
 import { ICreateToDoReq, IToDoResp, IUpdateToDoReq } from "../types/api";
 import api from "./api";
 
-const key = localStorage.getItem("pre-onboarding-key");
-
 export const createTodo = (todo: ICreateToDoReq) => {
+  const key = localStorage.getItem("pre-onboarding-key");
+
   return api.put<IToDoResp>(`/todos/`, todo, {
     headers: {
-      Authorization: key,
+      Authorization: `Bearer ${key}`,
       "Content-Type": "application/json",
     },
   });
 };
 
-export const getTodos = () => {
+export const getTodoList = () => {
+  const key = localStorage.getItem("pre-onboarding-key");
+
   console.log(key);
   return api.get<IToDoResp[]>("/todos", {
     headers: {
-      Authorization: key,
+      Authorization: `Bearer ${key}`,
     },
   });
 };
 
 export const updateTodo = (id: number, todo: IUpdateToDoReq) => {
+  const key = localStorage.getItem("pre-onboarding-key");
+
   return api.put<IToDoResp>(`/todos/${id}`, todo, {
     headers: {
-      Authorization: key,
+      Authorization: `Bearer ${key}`,
       "Content-Type": "application/json",
     },
   });
 };
 
 export const deleteTodo = (id: number) => {
+  const key = localStorage.getItem("pre-onboarding-key");
+
   return api.delete(`/todos/${id}`, {
     headers: {
-      Authorization: key,
+      Authorization: `Bearer ${key}`,
     },
   });
 };
