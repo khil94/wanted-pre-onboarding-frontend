@@ -14,7 +14,7 @@ export const createTodo = (todo: ICreateToDoReq) => {
 
 export const getTodos = () => {
   console.log(key);
-  return api.get<IToDoResp>("/todos", {
+  return api.get<IToDoResp[]>("/todos", {
     headers: {
       Authorization: key,
     },
