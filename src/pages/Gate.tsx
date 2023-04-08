@@ -14,7 +14,7 @@ export default function Gate() {
     if (key && loc?.pathname !== "/todo") {
       nav("/todo");
     }
-    if (!key && loc?.pathname !== "/todo") {
+    if (!key && loc?.pathname === "/todo") {
       nav("/signin");
     }
     setJudging(false);
