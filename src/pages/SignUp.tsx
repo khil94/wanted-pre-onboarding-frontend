@@ -3,6 +3,11 @@ import { useState, useEffect, FormEvent } from "react";
 import { PostSignUp } from "../api/signApi";
 import { ISignUpReq } from "../types/api";
 
+const formSize = {
+  default: 480,
+  small: 335,
+};
+
 export default function SignUp() {
   const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
@@ -45,55 +50,69 @@ export default function SignUp() {
   }, [emailErr, pwdErr, email, pwd]);
 
   return (
-    <FormWrapper>
-      <Form onSubmit={(e) => submitHandler(e)}>
-        <InputWrapper>
-          <Label htmlFor="signup-email">id</Label>
-          <Input
-            type="text"
-            id="signup-email"
-            name="email"
-            placeholder="이메일을 입력해주세요."
-            data-testid="email-input"
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
-          />
-          {emailErr && (
-            <WarningText>이메일에는 @가 들어가야 합니다!</WarningText>
-          )}
-        </InputWrapper>
-        <InputWrapper>
-          <Label htmlFor="signup-pwd">password</Label>
-          <Input
-            type="password"
-            id="signup-pwd"
-            name="pwd"
-            placeholder="비밀번호를 입력해주세요"
-            data-testid="password-input"
-            onChange={(e) => {
-              setPwd(e.target.value);
-            }}
-          />
-          {pwdErr && <WarningText>최소 8자 이상 기입해 주십시오.</WarningText>}
-        </InputWrapper>
-        <SubmitBtn
-          data-testid="signup-button"
-          disabled={buttonDisable}
-          type="submit"
-        >
-          회원가입
-        </SubmitBtn>
-      </Form>
-    </FormWrapper>
+    <Container>
+      <h1>SignUp</h1>
+      <FormWrapper>
+        <Form onSubmit={(e) => submitHandler(e)}>
+          <InputWrapper>
+            <Label htmlFor="signup-email">id</Label>
+            <Input
+              type="text"
+              id="signup-email"
+              name="email"
+              placeholder="이메일을 입력해주세요."
+              data-testid="email-input"
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+            />
+            {emailErr && (
+              <WarningText>이메일에는 @가 들어가야 합니다!</WarningText>
+            )}
+          </InputWrapper>
+          <InputWrapper>
+            <Label htmlFor="signup-pwd">password</Label>
+            <Input
+              type="password"
+              id="signup-pwd"
+              name="pwd"
+              placeholder="비밀번호를 입력해주세요"
+              data-testid="password-input"
+              onChange={(e) => {
+                setPwd(e.target.value);
+              }}
+            />
+            {pwdErr && (
+              <WarningText>최소 8자 이상 기입해 주십시오.</WarningText>
+            )}
+          </InputWrapper>
+          <SubmitBtn
+            data-testid="signup-button"
+            disabled={buttonDisable}
+            type="submit"
+          >
+            회원가입
+          </SubmitBtn>
+        </Form>
+      </FormWrapper>
+    </Container>
   );
 }
+
+const Container = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 const FormWrapper = styled.div`
   width: 50%;
   background-color: #f0f0f0;
   padding: 20px;
   border-radius: 12px;
+  min-width: ${formSize.small}px;
+  max-width: ${formSize.default}px;
 `;
 
 const Form = styled.form`
