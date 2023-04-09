@@ -4,7 +4,7 @@ import api from "./api";
 export const createTodo = (todo: ICreateToDoReq) => {
   const key = localStorage.getItem("pre-onboarding-key");
 
-  return api.put<IToDoResp>(`/todos/`, todo, {
+  return api.post<IToDoResp>(`/todos/`, todo, {
     headers: {
       Authorization: `Bearer ${key}`,
       "Content-Type": "application/json",
@@ -14,8 +14,6 @@ export const createTodo = (todo: ICreateToDoReq) => {
 
 export const getTodoList = () => {
   const key = localStorage.getItem("pre-onboarding-key");
-
-  console.log(key);
   return api.get<IToDoResp[]>("/todos", {
     headers: {
       Authorization: `Bearer ${key}`,
