@@ -25,6 +25,7 @@ export default function Gate() {
     <></>
   ) : (
     <Routes>
+      <Route path="/" element={<SignIn />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/signin" element={<SignIn />} />
       <Route path="/todo" element={<Todos />} />
