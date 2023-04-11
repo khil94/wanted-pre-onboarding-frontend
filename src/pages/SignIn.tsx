@@ -95,13 +95,22 @@ export default function SignIn() {
               <WarningText>최소 8자 이상 기입해 주십시오.</WarningText>
             )}
           </InputWrapper>
-          <SubmitBtn
-            data-testid="signin-button"
-            disabled={buttonDisable}
-            type="submit"
-          >
-            로그인
-          </SubmitBtn>
+          <BtnWrapper>
+            <SubmitBtn
+              data-testid="signin-button"
+              disabled={buttonDisable}
+              type="submit"
+            >
+              로그인
+            </SubmitBtn>
+            <SubmitBtn
+              onClick={() => {
+                nav("/signup");
+              }}
+            >
+              회원가입
+            </SubmitBtn>
+          </BtnWrapper>
         </Form>
       </FormWrapper>
     </Container>
@@ -151,8 +160,9 @@ const Input = styled.input`
 const SubmitBtn = styled.button`
   background-color: #004c99;
   color: white;
+  width: 100%;
+  margin: 0 10px;
   border: none;
-  margin-top: 32px;
   height: 48px;
   border-radius: 8px;
   :disabled {
@@ -163,4 +173,11 @@ const SubmitBtn = styled.button`
 const WarningText = styled.span`
   color: red;
   font-weight: bold;
+`;
+
+const BtnWrapper = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 32px;
 `;
