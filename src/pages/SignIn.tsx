@@ -24,8 +24,12 @@ export default function SignIn() {
       email,
       password: pwd,
     } as ISignUpReq);
-    localStorage.setItem("pre-onboarding-key", resp.data.access_token);
-    nav("/todo");
+    if (resp.status === 200) {
+      localStorage.setItem("pre-onboarding-key", resp.data.access_token);
+      nav("/todo");
+    } else {
+      alert("로그인 실패!");
+    }
   };
 
   const verifyEmail = (v: string) => {
