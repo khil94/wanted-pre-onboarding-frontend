@@ -49,7 +49,7 @@ export default function SignUpPage() {
               password: pwd,
             } as SignData;
             const resp = await PostSignUp(signData);
-            if (resp?.data) {
+            if (resp) {
               navigator("/signin");
             } else {
               alert("계정 생성에 실패하였습니다.");
