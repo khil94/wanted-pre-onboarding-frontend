@@ -4,17 +4,20 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import "./index.css";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
+import TodoPage from "./pages/TodoPage";
 import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
+
 root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
         <Route path="/signin" element={<SignInPage />}></Route>
         <Route path="/signup" element={<SignUpPage />}></Route>
+        <Route path="/todo" element={<TodoPage />}></Route>
         <Route path="/" element={<Navigate to="/signin" />}></Route>
       </Routes>
     </BrowserRouter>
