@@ -1,5 +1,8 @@
 import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { PostSignIn } from "../api/SignApi";
+import { SignData } from "../types";
 
 export default function SignInPage() {
   const [email, setEmail] = useState("");
@@ -7,6 +10,8 @@ export default function SignInPage() {
   const [isEmailValid, setIsEmailValid] = useState(false);
   const [isPwdValid, setIsPwdValid] = useState(false);
   const [isValid, setIdValid] = useState(false);
+
+  const navigator = useNavigate();
 
   useEffect(() => {
     if (email === "" || /(?=@)/.test(email)) {
@@ -36,7 +41,22 @@ export default function SignInPage() {
     <Container>
       <h1>SignIn</h1>
       <FormWrapper>
-        <Form>
+        <Form
+          onSubmit={async (e) => {
+            e.preventDefault();
+            const signData = {
+              email: email,
+              password: pwd,
+            } as SignData;
+            const resp = await PostSignIn(signData);
+            if (resp?.data.access_token) {
+              localStorage.setItem("ACCESS_TOKEN", resp.data.access_token);
+              navigator("/todo");
+            } else {
+              alert("로그인에 실패하였습니다.");
+            }
+          }}
+        >
           <Label htmlFor="signin-email">email</Label>
           <Input
             type="text"
