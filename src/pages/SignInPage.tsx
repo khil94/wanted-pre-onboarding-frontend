@@ -25,7 +25,7 @@ export default function SignInPage() {
   }, [pwd]);
 
   useEffect(() => {
-    if (isEmailValid && isPwdValid) {
+    if (isEmailValid && isPwdValid && email !== "" && pwd !== "") {
       setIdValid(true);
     } else {
       setIdValid(false);
