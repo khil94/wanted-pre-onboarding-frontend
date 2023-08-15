@@ -39,7 +39,7 @@ export default function SignUpPage() {
 
   return (
     <Container>
-      <h1>SignIn</h1>
+      <h1>SignUp</h1>
       <FormWrapper>
         <Form
           onSubmit={async (e) => {
@@ -84,9 +84,8 @@ export default function SignUpPage() {
           )}
           <BtnWrapper>
             <Btn disabled={!isValid} type="submit">
-              로그인
+              회원가입
             </Btn>
-            <Btn>회원가입</Btn>
           </BtnWrapper>
         </Form>
       </FormWrapper>
@@ -130,7 +129,8 @@ const ErrorText = styled.span`
 const BtnWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
+
   margin-top: 24px;
 `;
 
