@@ -87,7 +87,13 @@ export default function SignInPage() {
             <Btn disabled={!isValid} type="submit">
               로그인
             </Btn>
-            <Btn>회원가입</Btn>
+            <Btn
+              onClick={() => {
+                navigator("/signup");
+              }}
+            >
+              회원가입
+            </Btn>
           </BtnWrapper>
         </Form>
       </FormWrapper>
