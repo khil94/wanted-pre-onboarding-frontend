@@ -1,5 +1,8 @@
 import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { PostSignUp } from "../api/SignApi";
+import { SignData } from "../types";
 
 export default function SignUpPage() {
   const [email, setEmail] = useState("");
@@ -7,6 +10,8 @@ export default function SignUpPage() {
   const [isEmailValid, setIsEmailValid] = useState(false);
   const [isPwdValid, setIsPwdValid] = useState(false);
   const [isValid, setIdValid] = useState(false);
+
+  const navigator = useNavigate();
 
   useEffect(() => {
     if (email === "" || /(?=@)/.test(email)) {
@@ -36,7 +41,21 @@ export default function SignUpPage() {
     <Container>
       <h1>SignIn</h1>
       <FormWrapper>
-        <Form>
+        <Form
+          onSubmit={async (e) => {
+            e.preventDefault();
+            const signData = {
+              email: email,
+              password: pwd,
+            } as SignData;
+            const resp = await PostSignUp(signData);
+            if (resp?.data) {
+              navigator("/signin");
+            } else {
+              alert("계정 생성에 실패하였습니다.");
+            }
+          }}
+        >
           <Label htmlFor="signin-email">email</Label>
           <Input
             type="text"
