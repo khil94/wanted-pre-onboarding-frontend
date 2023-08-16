@@ -1,34 +1,72 @@
 import styled from "@emotion/styled";
 import { useState } from "react";
-import { TodoType } from "../types";
+import { UpdateTodo } from "../api/TodoApi";
+import { ToDoResp, TodoType } from "../types";
 
 interface IProp {
-  todo: TodoType;
+  todo: ToDoResp;
+  onDelete: () => void;
 }
 
-export default function Todo({ todo }: IProp) {
+export default function Todo({ todo, onDelete }: IProp) {
   const [content, setContent] = useState(todo.todo);
   const [checked, setChecked] = useState(todo.isCompleted);
   const [editMode, setEditMode] = useState(false);
 
+  const onUpdate = (newContent: string, newChecked: boolean) => {
+    const newTodo = { todo: newContent, isCompleted: newChecked } as TodoType;
+    UpdateTodo(newTodo, todo.id);
+  };
+
   return (
     <Container>
       {editMode ? (
-        <></>
+        <>
+          <Label>
+            <input
+              type="text"
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+            />
+          </Label>
+          <Btn
+            onClick={() => {
+              onUpdate(content, checked);
+              setEditMode(false);
+            }}
+            data-testid="submit-button"
+          >
+            제출
+          </Btn>
+          <Btn
+            onClick={() => {
+              setEditMode(false);
+              setContent(todo.todo);
+            }}
+            data-testid="cancel-button"
+          >
+            취소
+          </Btn>
+        </>
       ) : (
         <>
           <Label>
             <input
               type="checkbox"
               checked={checked}
-              onClick={(e) => setChecked(!checked)}
+              onChange={() => {
+                setChecked(!checked);
+                onUpdate(content, !checked);
+              }}
             />
             <span>{content}</span>
           </Label>
           <Btn onClick={() => setEditMode(true)} data-testid="modify-button">
             수정
           </Btn>
-          <Btn data-testid="delete-button">삭제</Btn>
+          <Btn onClick={onDelete} data-testid="delete-button">
+            삭제
+          </Btn>
         </>
       )}
     </Container>
