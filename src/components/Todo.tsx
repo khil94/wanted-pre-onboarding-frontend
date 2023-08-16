@@ -20,24 +20,28 @@ export default function Todo({ todo, onDelete }: IProp) {
 
   return (
     <Container>
-      <input
-        type="checkbox"
-        checked={checked}
-        onChange={() => {
-          setChecked(!checked);
-          onUpdate(content, !checked);
-        }}
-      />
+      <Label>
+        <input
+          type="checkbox"
+          checked={checked}
+          onChange={() => {
+            setChecked(!checked);
+            onUpdate(content, !checked);
+          }}
+        />
+        {editMode ? (
+          <input
+            type="text"
+            value={content}
+            data-testid="modify-input"
+            onChange={(e) => setContent(e.target.value)}
+          />
+        ) : (
+          <span>{content}</span>
+        )}
+      </Label>
       {editMode ? (
         <>
-          <Label>
-            <input
-              type="text"
-              value={content}
-              data-testid="modify-input"
-              onChange={(e) => setContent(e.target.value)}
-            />
-          </Label>
           <Btn
             onClick={() => {
               onUpdate(content, checked);
@@ -59,8 +63,6 @@ export default function Todo({ todo, onDelete }: IProp) {
         </>
       ) : (
         <>
-          <span>{content}</span>
-
           <Btn onClick={() => setEditMode(true)} data-testid="modify-button">
             수정
           </Btn>
