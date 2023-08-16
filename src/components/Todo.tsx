@@ -34,6 +34,7 @@ export default function Todo({ todo, onDelete }: IProp) {
             <input
               type="text"
               value={content}
+              data-testid="modify-input"
               onChange={(e) => setContent(e.target.value)}
             />
           </Label>
@@ -79,37 +80,8 @@ const Container = styled.li`
   align-items: center;
 `;
 
-const FormWrapper = styled.div`
-  width: 50%;
-`;
-
-const Form = styled.form`
-  padding: 12px;
-  display: flex;
-  flex-direction: column;
-`;
-
 const Label = styled.label`
   margin-bottom: 8px;
-`;
-
-const Input = styled.input`
-  margin-bottom: 8px;
-  padding: 8px;
-  border-radius: 8px;
-`;
-
-const ErrorText = styled.span`
-  color: red;
-  font-weight: bold;
-  margin: 4px 0 4px;
-`;
-
-const BtnWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-top: 24px;
 `;
 
 const Btn = styled.button`

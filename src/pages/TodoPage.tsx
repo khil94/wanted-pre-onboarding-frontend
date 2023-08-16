@@ -91,20 +91,6 @@ const Input = styled.input`
   border-radius: 8px;
 `;
 
-const ErrorText = styled.span`
-  color: red;
-  font-weight: bold;
-  margin: 4px 0 4px;
-`;
-
-const BtnWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-
-  margin-top: 24px;
-`;
-
 const Btn = styled.button`
   padding: 8px;
   border-radius: 8px;
