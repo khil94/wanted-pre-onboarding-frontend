@@ -16,25 +16,33 @@ export const CreateTodo = (todo: string) => {
 };
 
 export const GetTodos = () => {
+  const key = localStorage.getItem("ACCESS_TOKEN");
+
   return api.get<ToDoResp[]>("todos", {
     headers: {
-      "Content-Type": "application/json",
+      Authorization: `Bearer ${key}`,
     },
   });
 };
 
 export const UpdateTodo = (data: TodoType, id: number) => {
+  const key = localStorage.getItem("ACCESS_TOKEN");
+
   return api.put<ToDoResp>(`todos/${id}`, data, {
     headers: {
+      Authorization: `Bearer ${key}`,
+
       "Content-Type": "application/json",
     },
   });
 };
 
 export const DeleteTodo = (id: number) => {
+  const key = localStorage.getItem("ACCESS_TOKEN");
+
   return api.delete(`todos/${id}`, {
     headers: {
-      "Content-Type": "application/json",
+      Authorization: `Bearer ${key}`,
     },
   });
 };
