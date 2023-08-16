@@ -6,3 +6,8 @@ export interface SignData {
 export interface SignInResp {
   access_token: string;
 }
+
+export interface TodoType {
+  content: string;
+  checked: boolean;
+}
