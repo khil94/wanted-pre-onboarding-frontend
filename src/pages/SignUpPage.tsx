@@ -35,7 +35,7 @@ export default function SignUpPage() {
     } else {
       setIdValid(false);
     }
-  }, [isEmailValid, isPwdValid]);
+  }, [isEmailValid, isPwdValid, email, pwd]);
 
   return (
     <Container>

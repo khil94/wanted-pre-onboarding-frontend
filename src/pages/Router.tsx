@@ -23,7 +23,7 @@ export default function Router() {
       navigator("/signin");
     }
     setLoading(false);
-  }, []);
+  }, [location.pathname, navigator]);
 
   return loading ? (
     <></>
