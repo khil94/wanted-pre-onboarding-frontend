@@ -43,6 +43,7 @@ export default function Todo({ todo, onDelete }: IProp) {
       {editMode ? (
         <>
           <Btn
+            disabled={!content}
             onClick={() => {
               onUpdate(content, checked);
               setEditMode(false);
