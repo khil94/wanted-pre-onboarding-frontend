@@ -1,12 +1,19 @@
 import styled from "@emotion/styled";
+import { useState } from "react";
 import Todo from "../components/Todo";
 
 export default function TodoPage() {
+  const [content, setContent] = useState("");
+
   return (
     <Container>
       <FormWrapper>
         <Label htmlFor="todo-input">Todo입력</Label>
-        <Input data-testid="new-todo-input" type="text"></Input>
+        <Input
+          onChange={(e) => setContent(e.target.value)}
+          data-testid="new-todo-input"
+          type="text"
+        ></Input>
         <Btn data-testid="new-todo-add-button" type="button">
           추가
         </Btn>
@@ -14,8 +21,8 @@ export default function TodoPage() {
       <ul>
         <Todo
           todo={{
-            content: "test",
-            checked: false,
+            todo: "test",
+            isCompleted: false,
           }}
         />
       </ul>

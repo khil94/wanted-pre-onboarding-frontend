@@ -8,6 +8,13 @@ export interface SignInResp {
 }
 
 export interface TodoType {
-  content: string;
-  checked: boolean;
+  todo: string;
+  isCompleted: boolean;
+}
+
+export interface ToDoResp {
+  id: number;
+  todo: string;
+  isCompleted: boolean;
+  userId: number;
 }

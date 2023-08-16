@@ -7,8 +7,8 @@ interface IProp {
 }
 
 export default function Todo({ todo }: IProp) {
-  const [content, setContent] = useState(todo.content);
-  const [checked, setChecked] = useState(todo.checked);
+  const [content, setContent] = useState(todo.todo);
+  const [checked, setChecked] = useState(todo.isCompleted);
   const [editMode, setEditMode] = useState(false);
 
   return (
@@ -16,14 +16,20 @@ export default function Todo({ todo }: IProp) {
       {editMode ? (
         <></>
       ) : (
-        <Label>
-          <input
-            type="checkbox"
-            checked={checked}
-            onClick={(e) => setChecked(!checked)}
-          />
-          <span>{content}</span>
-        </Label>
+        <>
+          <Label>
+            <input
+              type="checkbox"
+              checked={checked}
+              onClick={(e) => setChecked(!checked)}
+            />
+            <span>{content}</span>
+          </Label>
+          <Btn onClick={() => setEditMode(true)} data-testid="modify-button">
+            수정
+          </Btn>
+          <Btn data-testid="delete-button">삭제</Btn>
+        </>
       )}
     </Container>
   );
@@ -32,7 +38,7 @@ export default function Todo({ todo }: IProp) {
 const Container = styled.li`
   width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
 `;
 
