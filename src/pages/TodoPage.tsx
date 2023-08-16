@@ -1,30 +1,55 @@
 import styled from "@emotion/styled";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { CreateTodo, GetTodos } from "../api/TodoApi";
 import Todo from "../components/Todo";
+import { ToDoResp } from "../types";
 
 export default function TodoPage() {
   const [content, setContent] = useState("");
+  const [todoList, setTodoList] = useState<ToDoResp[]>([]);
+
+  const getTodoList = async () => {
+    const resp = await GetTodos();
+    setTodoList(resp.data);
+  };
+
+  useEffect(() => {
+    getTodoList();
+  }, []);
+
+  const onCreate = async () => {
+    const resp = await CreateTodo(content);
+    setTodoList([...todoList, resp.data]);
+  };
 
   return (
     <Container>
       <FormWrapper>
-        <Label htmlFor="todo-input">Todo입력</Label>
-        <Input
-          onChange={(e) => setContent(e.target.value)}
-          data-testid="new-todo-input"
-          type="text"
-        ></Input>
-        <Btn data-testid="new-todo-add-button" type="button">
-          추가
-        </Btn>
+        <Form>
+          <Label htmlFor="todo-input">Todo입력</Label>
+          <Input
+            onChange={(e) => setContent(e.target.value)}
+            data-testid="new-todo-input"
+            type="text"
+          ></Input>
+          <Btn
+            onClick={(e) => {
+              e.preventDefault();
+              if (content) {
+                onCreate();
+              }
+            }}
+            data-testid="new-todo-add-button"
+            type="submit"
+          >
+            추가
+          </Btn>
+        </Form>
       </FormWrapper>
       <ul>
-        <Todo
-          todo={{
-            todo: "test",
-            isCompleted: false,
-          }}
-        />
+        {todoList.map((v) => (
+          <Todo key={v.id} todo={v} onDelete={() => {}} />
+        ))}
       </ul>
     </Container>
   );
@@ -44,7 +69,7 @@ const FormWrapper = styled.div`
 const Form = styled.form`
   padding: 12px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 `;
 
 const Label = styled.label`
@@ -74,6 +99,5 @@ const BtnWrapper = styled.div`
 const Btn = styled.button`
   padding: 8px;
   border-radius: 8px;
-  width: 45%;
   border-width: 1px;
 `;
