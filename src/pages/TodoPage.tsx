@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
-import { CreateTodo, GetTodos } from "../api/TodoApi";
+import { CreateTodo, DeleteTodo, GetTodos } from "../api/TodoApi";
 import Todo from "../components/Todo";
 import { ToDoResp } from "../types";
 
@@ -48,7 +48,14 @@ export default function TodoPage() {
       </FormWrapper>
       <ul>
         {todoList.map((v) => (
-          <Todo key={v.id} todo={v} onDelete={() => {}} />
+          <Todo
+            key={v.id}
+            todo={v}
+            onDelete={() => {
+              DeleteTodo(v.id);
+              setTodoList(todoList.filter((t) => v.id !== t.id));
+            }}
+          />
         ))}
       </ul>
     </Container>
