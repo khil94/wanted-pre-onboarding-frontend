@@ -29,6 +29,7 @@ export default function TodoPage() {
           <Label htmlFor="todo-input">Todo입력</Label>
           <Input
             onChange={(e) => setContent(e.target.value)}
+            value={content}
             data-testid="new-todo-input"
             type="text"
           ></Input>
@@ -38,6 +39,7 @@ export default function TodoPage() {
               if (content) {
                 onCreate();
               }
+              setContent("");
             }}
             data-testid="new-todo-add-button"
             type="submit"
