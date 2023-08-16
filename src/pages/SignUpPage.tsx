@@ -83,7 +83,7 @@ export default function SignUpPage() {
             <ErrorText>비밀번호는 8자리 이상이어야 합니다.</ErrorText>
           )}
           <BtnWrapper>
-            <Btn disabled={!isValid} type="submit">
+            <Btn data-testid="signup-button" disabled={!isValid} type="submit">
               회원가입
             </Btn>
           </BtnWrapper>

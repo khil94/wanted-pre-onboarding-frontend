@@ -84,7 +84,7 @@ export default function SignInPage() {
             <ErrorText>비밀번호는 8자리 이상이어야 합니다.</ErrorText>
           )}
           <BtnWrapper>
-            <Btn disabled={!isValid} type="submit">
+            <Btn data-testid="signin-button" disabled={!isValid} type="submit">
               로그인
             </Btn>
             <Btn
